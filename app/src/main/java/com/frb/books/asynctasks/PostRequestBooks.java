@@ -27,15 +27,9 @@ public class PostRequestBooks extends AsyncTask<String,Void,String>{
     }
 
     @Override
-    protected void onPreExecute() {
-        httpService.setStrRequest(strRequest);
-    }
-    @Override
     protected String doInBackground(String... strings) {
         try{
         URL url = new URL("https://ancient-earth-13943.herokuapp.com/api/books/");
-        httpService.setStrRequest(strRequest);
-        httpService.setAppContext(appContext);
         String response = httpService.HttpPost(url);
         String[] listResponse = response.split(":");
         if (listResponse[0].equals("400")) {

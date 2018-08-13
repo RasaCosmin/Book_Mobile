@@ -28,16 +28,11 @@ import java.net.URL;
             this.appContext = appContext;
         }
 
-        @Override
-        protected void onPreExecute() {
-            httpService.setStrRequest(strRequest);
-        }
 
         @Override
         protected String doInBackground(String... strings) {
             try {
                 URL url = new URL("https://ancient-earth-13943.herokuapp.com/api/users/register");
-                httpService.setStrRequest(strRequest);
                 String response = httpService.HttpPost(url);
                 String[] listResponse = response.split(":");
                 if (listResponse[0].equals("400")) {
