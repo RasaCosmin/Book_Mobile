@@ -32,6 +32,7 @@ public class HttpService {
     public HttpService() {
     }
 
+
     public String getStrRequest() {
         return strRequest;
     }

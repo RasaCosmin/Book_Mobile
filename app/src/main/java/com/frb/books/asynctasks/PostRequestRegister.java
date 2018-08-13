@@ -23,7 +23,7 @@ import java.net.URL;
         private String codResult;
 
         public PostRequestRegister( String strRequest, Context appContext) {
-            this.httpService = new HttpService();
+            this.httpService = new HttpService(strRequest,appContext);
             this.strRequest = strRequest;
             this.appContext = appContext;
         }
