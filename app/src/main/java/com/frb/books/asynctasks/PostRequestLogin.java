@@ -23,6 +23,7 @@ public class PostRequestLogin extends AsyncTask<String,Void,String>{
     private SharedPreferences sharedPreferences;
 
 
+
     public PostRequestLogin(String strRequest, Context appContext) {
         this.httpService = new HttpService(strRequest,appContext);
         this.strRequest = strRequest;
@@ -79,5 +80,13 @@ public class PostRequestLogin extends AsyncTask<String,Void,String>{
         Gson gson = new GsonBuilder().create();
         loginResponse loginResponse = gson.fromJson(response, com.frb.books.classes.loginResponse.class);
         return loginResponse;
+    }
+
+    public String getCodResult() {
+        return codResult;
+    }
+
+    public void setCodResult(String codResult) {
+        this.codResult = codResult;
     }
 }

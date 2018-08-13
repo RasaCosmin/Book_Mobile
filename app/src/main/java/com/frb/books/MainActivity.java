@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     private int id_metoda;
     private  Handler handler;
     private Book book;
+    private ListCardView listCardView;
 
 
     @Override
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         gson = gsonBuilder.create();
         registerFragment = new RegisterFragment();
         loginFragment = new LoginFragment();
+        listCardView = new ListCardView();
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.id_container, registerFragment);
@@ -142,6 +144,18 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         user.setPassword(password);
         user.setEmail(email);
         String request = convertLoginUserToJson(user);
-        new PostRequestLogin(request,getApplicationContext()).execute();
+        final PostRequestLogin postRequestLogin = new PostRequestLogin(request,getApplicationContext());
+        postRequestLogin.execute();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (!(postRequestLogin.getCodResult().equals("400"))) {
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.id_container,listCardView);
+                    transaction.commit();
+                }
+            }
+        }, 5000);
     }
 }
