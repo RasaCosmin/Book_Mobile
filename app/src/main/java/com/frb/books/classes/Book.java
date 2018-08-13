@@ -10,6 +10,15 @@ public class Book {
     @SerializedName("publisher")
     private String publisher;
 
+    public Book() {
+    }
+
+    public Book(String title, String author, String publisher) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+    }
+
     public String getTitle() {
         return title;
     }
