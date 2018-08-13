@@ -24,7 +24,7 @@ public class PostRequestLogin extends AsyncTask<String,Void,String>{
 
 
     public PostRequestLogin(String strRequest, Context appContext) {
-        this.httpService = new HttpService();
+        this.httpService = new HttpService(strRequest,appContext);
         this.strRequest = strRequest;
         this.appContext = appContext;
     }

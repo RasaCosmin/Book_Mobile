@@ -34,7 +34,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 import javax.security.auth.login.LoginException;
 
-public class MainActivity extends AppCompatActivity implements RegisterFragment.OnRegisterListener {
+public class MainActivity extends AppCompatActivity implements RegisterFragment.OnRegisterListener, LoginFragment.onLoginListener {
     private RegisterFragment registerFragment;
     private LoginFragment loginFragment;
     private Gson gson;
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
                    public void run() {
 
                        if (!(postRequestRegister.getCodResult().equals("400"))) {
+                           System.out.println("1");
                            FragmentTransaction transaction = fragmentManager.beginTransaction();
                            transaction.replace(R.id.id_container, loginFragment);
                            transaction.commit();
@@ -135,6 +136,12 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
     }
 
 
-
-
+    @Override
+    public void onPressLogin(String email, String password) {
+        loginUser user = new loginUser();
+        user.setPassword(password);
+        user.setEmail(email);
+        String request = convertLoginUserToJson(user);
+        new PostRequestLogin(request,getApplicationContext()).execute();
+    }
 }
